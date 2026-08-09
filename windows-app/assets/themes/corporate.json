@@ -1,0 +1,9 @@
+{
+  "name": "Corporate",
+  "panel_color": [250, 250, 252, 238],
+  "text_color": [20, 28, 42, 255],
+  "accent_color": [0, 118, 141, 255],
+  "muted_color": [84, 94, 108, 255],
+  "shadow_color": [0, 0, 0, 95],
+  "font_family": "Segoe UI"
+}

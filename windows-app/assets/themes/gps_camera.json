@@ -1,0 +1,9 @@
+{
+  "name": "GPS Camera",
+  "panel_color": [12, 16, 18, 230],
+  "text_color": [250, 252, 249, 255],
+  "accent_color": [255, 70, 70, 255],
+  "muted_color": [210, 220, 215, 255],
+  "shadow_color": [0, 0, 0, 150],
+  "font_family": "Segoe UI"
+}

@@ -1,0 +1,9 @@
+{
+  "name": "Transparent",
+  "panel_color": [0, 0, 0, 120],
+  "text_color": [255, 255, 255, 255],
+  "accent_color": [130, 235, 210, 255],
+  "muted_color": [230, 236, 240, 255],
+  "shadow_color": [0, 0, 0, 90],
+  "font_family": "Segoe UI"
+}

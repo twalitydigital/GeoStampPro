@@ -1,0 +1,9 @@
+{
+  "name": "Adventure",
+  "panel_color": [30, 42, 34, 224],
+  "text_color": [252, 252, 238, 255],
+  "accent_color": [238, 178, 75, 255],
+  "muted_color": [221, 230, 202, 255],
+  "shadow_color": [0, 0, 0, 135],
+  "font_family": "Segoe UI"
+}

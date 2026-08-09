@@ -1,0 +1,9 @@
+{
+  "name": "Minimal",
+  "panel_color": [245, 247, 250, 232],
+  "text_color": [24, 29, 36, 255],
+  "accent_color": [38, 112, 180, 255],
+  "muted_color": [90, 100, 112, 255],
+  "shadow_color": [0, 0, 0, 85],
+  "font_family": "Segoe UI"
+}
