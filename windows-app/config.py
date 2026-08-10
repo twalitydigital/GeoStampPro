@@ -1,31 +1,36 @@
-"""Application constants for Twality GeoStamp."""
+"""Application constants for Twality GeoStamp Pro."""
 
 from __future__ import annotations
 
+import os
+import sys
 from pathlib import Path
 
-APP_NAME = "Twality GeoStamp"
+APP_NAME = "Twality GeoStamp Pro"
 APP_VERSION = "1.0.0"
 ORG_NAME = "Twality"
 
 BASE_DIR = Path(__file__).resolve().parent
-ASSETS_DIR = BASE_DIR / "assets"
+BUNDLE_DIR = Path(getattr(sys, "_MEIPASS", BASE_DIR))
+RUNTIME_DIR = Path(os.getenv("LOCALAPPDATA", BASE_DIR)) / "Twality GeoStamp Pro" if getattr(sys, "frozen", False) else BASE_DIR / "resources"
+ASSETS_DIR = BUNDLE_DIR / "assets"
 THEMES_DIR = ASSETS_DIR / "themes"
 FONTS_DIR = ASSETS_DIR / "fonts"
 ICONS_DIR = ASSETS_DIR / "icons"
-RESOURCES_DIR = BASE_DIR / "resources"
-LOG_DIR = BASE_DIR / "logs"
-OUTPUT_DIR = BASE_DIR / "output"
+RESOURCES_DIR = RUNTIME_DIR
+LOG_DIR = RUNTIME_DIR / "logs"
+OUTPUT_DIR = RUNTIME_DIR / "output"
 CACHE_DIR = RESOURCES_DIR / "cache"
 GEOCODE_CACHE = CACHE_DIR / "geocode_cache.json"
 MAP_CACHE_DIR = CACHE_DIR / "map_tiles"
 SETTINGS_FILE = RESOURCES_DIR / "settings.json"
+APP_ICON = BUNDLE_DIR / "Logo.ico"
 
 SUPPORTED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".heic", ".heif"}
 JPEG_EXTENSIONS = {".jpg", ".jpeg"}
 DEFAULT_OUTPUT_SUFFIX = "_GeoStamped"
 NOMINATIM_URL = "https://nominatim.openstreetmap.org/reverse"
-USER_AGENT = f"TwalityGeoStamp/{APP_VERSION} (metadata-preserving desktop app)"
+USER_AGENT = f"TwalityGeoStampPro/{APP_VERSION} (metadata-preserving desktop app)"
 
 DEFAULT_SETTINGS = {
     "theme": "professional",
@@ -35,8 +40,18 @@ DEFAULT_SETTINGS = {
     "map_height": 220,
     "font_size": 24,
     "overlay_position": "bottom",
+    "print_geo_stamp": True,
+    "timestamp_format": "yyyy-mm-dd_24h",
+    "stamp_all_additional_exif": False,
     "language": "en",
-    "logo_path": "",
+    "print_watermark": False,
+    "watermark_type": "text",
+    "watermark_text": "Twality GeoStamp Pro",
+    "watermark_image_path": "",
+    "watermark_position": "bottom_right",
+    "watermark_opacity": 45,
+    "watermark_size": 18,
+    "watermark_margin": 4,
     "last_input_folder": "",
     "last_output_folder": "",
     "window_width": 1280,

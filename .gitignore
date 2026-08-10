@@ -29,3 +29,4 @@ logs/
 *.bak
 *.orig
 
+*.exe

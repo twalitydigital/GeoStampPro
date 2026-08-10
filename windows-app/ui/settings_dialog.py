@@ -2,8 +2,9 @@
 
 from __future__ import annotations
 
-from PySide6.QtWidgets import QDialog, QFormLayout, QSpinBox, QDialogButtonBox, QLineEdit
+from PySide6.QtWidgets import QCheckBox, QComboBox, QDialog, QDialogButtonBox, QFormLayout, QSpinBox
 
+from core.overlay_renderer import TIMESTAMP_FORMATS
 from core.settings import SettingsStore
 
 
@@ -27,12 +28,20 @@ class SettingsDialog(QDialog):
         self.map_height = QSpinBox()
         self.map_height.setRange(120, 700)
         self.map_height.setValue(int(settings.get("map_height", 220)))
-        self.logo = QLineEdit(str(settings.get("logo_path", "")))
+        self.timestamp_format = QComboBox()
+        for key, label, _ in TIMESTAMP_FORMATS:
+            self.timestamp_format.addItem(label, key)
+        current_format = str(settings.get("timestamp_format", "yyyy-mm-dd_24h"))
+        current_index = self.timestamp_format.findData(current_format)
+        self.timestamp_format.setCurrentIndex(max(0, current_index))
+        self.stamp_all_additional_exif = QCheckBox("Stamp all additional EXIF Data")
+        self.stamp_all_additional_exif.setChecked(bool(settings.get("stamp_all_additional_exif", False)))
         layout.addRow("Output quality", self.quality)
         layout.addRow("Font size", self.font_size)
         layout.addRow("Map width", self.map_width)
         layout.addRow("Map height", self.map_height)
-        layout.addRow("Logo path", self.logo)
+        layout.addRow("Timestamp format", self.timestamp_format)
+        layout.addRow("", self.stamp_all_additional_exif)
         buttons = QDialogButtonBox(QDialogButtonBox.Save | QDialogButtonBox.Cancel)
         buttons.accepted.connect(self.save)
         buttons.rejected.connect(self.reject)
@@ -43,5 +52,6 @@ class SettingsDialog(QDialog):
         self.settings.set("font_size", self.font_size.value())
         self.settings.set("map_width", self.map_width.value())
         self.settings.set("map_height", self.map_height.value())
-        self.settings.set("logo_path", self.logo.text())
+        self.settings.set("timestamp_format", self.timestamp_format.currentData())
+        self.settings.set("stamp_all_additional_exif", self.stamp_all_additional_exif.isChecked())
         self.accept()

@@ -1,0 +1,66 @@
+Twality GeoStamp Pro 1.0 Freeware License
+
+Copyright (c) 2026 Twality Digital Solutions LLP.
+All rights reserved.
+
+This license applies to the Twality GeoStamp Pro desktop application distributed by
+Twality Digital Solutions LLP.
+
+1. License Grant
+
+Twality Digital Solutions LLP grants you a personal, non-exclusive, non-transferable,
+revocable license to install and use Twality GeoStamp Pro free of charge for personal,
+professional, educational, and internal business use.
+
+2. Restrictions
+
+You may not:
+
+- sell, rent, lease, sublicense, or redistribute the application as a paid product;
+- reverse engineer, decompile, or disassemble the application except where applicable
+  law expressly permits it;
+- remove product names, copyright notices, trademarks, or attribution notices;
+- use the application in a way that violates applicable law or third-party rights.
+
+3. Ownership
+
+Twality GeoStamp Pro, including its name, branding, user interface, documentation, and
+application code, is owned by Twality Digital Solutions LLP or its licensors. This
+license does not transfer ownership of the application to you.
+
+4. Third-Party Components
+
+The application may include or depend on third-party open-source components. Those
+components remain subject to their respective licenses. See THIRD_PARTY_NOTICES.md
+for a summary of known dependencies.
+
+5. User Content and Metadata
+
+The application processes images selected by the user. Stamped files are written as
+output copies. Original source files are not intentionally modified by the application.
+You are responsible for verifying stamped output before using it for operational,
+legal, archival, or compliance purposes.
+
+6. External Services
+
+The application may use external services, such as OpenStreetMap Nominatim, to perform
+reverse geocoding when Geo Stamping is enabled. Availability and accuracy of external
+services are not guaranteed.
+
+7. Disclaimer of Warranty
+
+The application is provided "as is" and "as available" without warranties of any kind,
+whether express, implied, statutory, or otherwise, including warranties of
+merchantability, fitness for a particular purpose, accuracy, or non-infringement.
+
+8. Limitation of Liability
+
+To the maximum extent permitted by law, Twality Digital Solutions LLP will not be liable
+for indirect, incidental, special, consequential, exemplary, or punitive damages, or for
+loss of data, profits, business, goodwill, or use, arising from or related to the
+application.
+
+9. Contact
+
+Twality Digital Solutions LLP
+Website: https://www.twality.com

@@ -6,7 +6,15 @@ a = Analysis(
     ['../main.py'],
     pathex=[],
     binaries=[],
-    datas=[('../assets', 'assets'), ('../resources', 'resources')],
+    datas=[
+        ('../assets', 'assets'),
+        ('../Logo.ico', '.'),
+        ('../LICENSE.txt', '.'),
+        ('../PRIVACY.md', '.'),
+        ('../THIRD_PARTY_NOTICES.md', '.'),
+        ('../STORE_LISTING_DRAFT.md', '.'),
+        ('../STORE_PUBLISHING_GUIDE.md', '.'),
+    ],
     hiddenimports=['PIL._tkinter_finder', 'pillow_heif'],
     hookspath=[],
     hooksconfig={},
@@ -29,7 +37,7 @@ exe = EXE(
     strip=False,
     upx=True,
     console=False,
-    icon='../assets/icons/app.ico',
+    icon='../Logo.ico',
 )
 coll = COLLECT(
     exe,

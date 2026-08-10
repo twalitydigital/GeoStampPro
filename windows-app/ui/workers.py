@@ -27,6 +27,8 @@ class BatchWorker(QObject):
         theme: Theme,
         options: OverlayOptions,
         language: str,
+        exif_only_paths: set[Path] | None = None,
+        paths: list[Path] | None = None,
     ) -> None:
         super().__init__()
         self.processor = processor
@@ -37,6 +39,8 @@ class BatchWorker(QObject):
         self.theme = theme
         self.options = options
         self.language = language
+        self.exif_only_paths = exif_only_paths or set()
+        self.paths = paths
 
     @Slot()
     def run(self) -> None:
@@ -50,6 +54,8 @@ class BatchWorker(QObject):
             self.options,
             self.language,
             self._emit_progress,
+            self.exif_only_paths,
+            self.paths,
         )
         self.finished.emit(results)
 

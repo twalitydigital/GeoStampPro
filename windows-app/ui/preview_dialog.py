@@ -14,7 +14,7 @@ class PreviewDialog(QDialog):
 
     def __init__(self, image_path: Path, parent=None) -> None:
         super().__init__(parent)
-        self.setWindowTitle(f"Preview - {image_path.name}")
+        self.setWindowTitle(f"Stamped Preview - {image_path.name}")
         self.resize(1000, 700)
         layout = QHBoxLayout(self)
         self.view = QGraphicsView()

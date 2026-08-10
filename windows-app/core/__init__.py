@@ -1,1 +1,1 @@
-"""Core services for Twality GeoStamp."""
+"""Core services for Twality GeoStamp Pro."""

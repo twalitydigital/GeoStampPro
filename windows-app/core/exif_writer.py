@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
+import json
 import logging
 import shutil
 import subprocess
 from pathlib import Path
 
 LOGGER = logging.getLogger(__name__)
+EXIFTOOL_TIMEOUT_SECONDS = 30
 
 
 class ExifToolMissingError(RuntimeError):
@@ -37,7 +39,10 @@ class ExifWriter:
             str(output),
         ]
         LOGGER.info("Copying metadata with ExifTool: %s", output)
-        result = subprocess.run(command, capture_output=True, text=True, check=False)
+        try:
+            result = subprocess.run(command, capture_output=True, text=True, check=False, timeout=EXIFTOOL_TIMEOUT_SECONDS)
+        except subprocess.TimeoutExpired as exc:
+            raise RuntimeError("ExifTool metadata copy timed out.") from exc
         if result.returncode != 0:
             raise RuntimeError(result.stderr.strip() or result.stdout.strip() or "ExifTool metadata copy failed.")
         backup = output.with_name(output.name + "_original")
@@ -58,9 +63,16 @@ class ExifWriter:
         return True
 
     def _read_tags(self, path: Path, tags: list[str]) -> dict[str, str]:
-        command = [self.executable, "-s3", *tags, str(path)]
-        result = subprocess.run(command, capture_output=True, text=True, check=False)
+        command = [self.executable, "-j", "-s", *tags, str(path)]
+        try:
+            result = subprocess.run(command, capture_output=True, text=True, check=False, timeout=EXIFTOOL_TIMEOUT_SECONDS)
+        except subprocess.TimeoutExpired as exc:
+            raise RuntimeError("ExifTool metadata read timed out.") from exc
         if result.returncode != 0:
             raise RuntimeError(result.stderr.strip() or "ExifTool metadata read failed.")
-        values = result.stdout.splitlines()
-        return {tag.lstrip("-"): values[index].strip() if index < len(values) else "" for index, tag in enumerate(tags)}
+        try:
+            records = json.loads(result.stdout)
+        except json.JSONDecodeError as exc:
+            raise RuntimeError("ExifTool metadata read returned invalid JSON.") from exc
+        values = records[0] if records else {}
+        return {tag.lstrip("-"): str(values.get(tag.lstrip("-"), "")).strip() for tag in tags}
