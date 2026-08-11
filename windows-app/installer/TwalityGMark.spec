@@ -8,6 +8,7 @@ a = Analysis(
     binaries=[],
     datas=[
         ('../assets', 'assets'),
+        ('../build-vendor', 'vendor'),
         ('../Logo.ico', '.'),
         ('../Logo.png', '.'),
         ('../LICENSE.txt', '.'),

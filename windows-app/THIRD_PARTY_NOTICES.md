@@ -22,9 +22,11 @@ metadata in the release environment before publishing.
 
 ## External Tools
 
-- ExifTool is required for full JPEG metadata preservation. ExifTool is not bundled by
-  this project unless explicitly added to a release package. Users can install it
-  separately and make `exiftool.exe` available on PATH.
+- ExifTool 13.59 by Phil Harvey is bundled privately for full JPEG metadata
+  preservation. Architecture-specific Windows executables are kept under
+  `vendor\exiftool\x64` and `vendor\exiftool\x86` with each copy's required
+  `exiftool_files` folder. ExifTool is distributed under the Perl Artistic License.
+  Official project site: https://exiftool.org/
 
 ## External Services
 

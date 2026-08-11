@@ -103,6 +103,24 @@ The build copies committed Store/MSIX image assets from `assets\store` into
 
 After regenerating, review and commit the updated PNG files under `assets\store`.
 
+ExifTool is bundled from architecture-specific folders under `vendor\exiftool`. To
+refresh the pinned vendor copy for the current target architecture, run:
+
+```powershell
+.\build-windows.ps1 -TargetArch x64 -SkipInstaller -FetchExifTool
+.\build-windows.ps1 -TargetArch x86 -SkipInstaller -FetchExifTool
+```
+
+If the network download is unavailable, extract the official Windows ZIP manually and
+import it with:
+
+```powershell
+.\tools\fetch_exiftool.ps1 -TargetArch x86 -Bitness 32 -SourcePath C:\Path\To\exiftool-13.59_32
+```
+
+After fetching, review and commit `vendor\exiftool\x64`,
+`vendor\exiftool\x86`, and `THIRD_PARTY_NOTICES.md`.
+
 Expected output:
 
 ```text
@@ -146,7 +164,7 @@ Verify:
 - Help > Help Contents opens correctly.
 - Preview First Image works.
 - Batch processing creates stamped copies.
-- JPEG metadata restore works when ExifTool is available on PATH.
+- JPEG metadata restore works using the bundled ExifTool.
 - Reverse geocoding and map display behave correctly when internet access is available.
 
 ## 8. Create the Partner Center Submission

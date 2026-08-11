@@ -9,8 +9,23 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-ExifTool must be available globally on PATH as `exiftool.exe` for full JPEG metadata preservation.
 Use Inno Setup 6.3 or newer when creating installers.
+
+ExifTool is bundled privately under architecture-specific folders in
+`vendor\exiftool` for full JPEG metadata preservation. Refresh it only when
+intentionally updating the pinned vendor copy:
+
+```powershell
+.\build-windows.ps1 -TargetArch x64 -SkipInstaller -FetchExifTool
+.\build-windows.ps1 -TargetArch x86 -SkipInstaller -FetchExifTool
+```
+
+If the network download is unavailable, extract the official Windows ZIP manually and
+import it with:
+
+```powershell
+.\tools\fetch_exiftool.ps1 -TargetArch x86 -Bitness 32 -SourcePath C:\Path\To\exiftool-13.59_32
+```
 
 ## Run Locally
 
@@ -26,7 +41,7 @@ python main.py
 4. Use File > Preview First Image.
 5. Run a small batch.
 6. Confirm output files are created without modifying originals.
-7. Confirm JPEG metadata is restored when ExifTool is available.
+7. Confirm JPEG metadata is restored using the bundled ExifTool.
 
 ## Build
 

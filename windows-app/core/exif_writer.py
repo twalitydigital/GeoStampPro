@@ -4,26 +4,46 @@ from __future__ import annotations
 
 import json
 import logging
+import platform
 import shutil
 import subprocess
 from pathlib import Path
+
+from config import EXIFTOOL_EXE, VENDOR_DIR
 
 LOGGER = logging.getLogger(__name__)
 EXIFTOOL_TIMEOUT_SECONDS = 30
 
 
 class ExifToolMissingError(RuntimeError):
-    """Raised when exiftool is not installed or not on PATH."""
+    """Raised when ExifTool is not bundled and not available on PATH."""
 
 
 class ExifWriter:
     """Copy and verify all metadata from an original file to an output file."""
 
-    def __init__(self, executable: str = "exiftool") -> None:
-        self.executable = executable
+    def __init__(self, executable: str | None = None) -> None:
+        self.executable = executable or self._resolve_executable()
+
+    @staticmethod
+    def _resolve_executable() -> str:
+        """Prefer the private bundled ExifTool, then fall back to PATH."""
+        if EXIFTOOL_EXE.exists():
+            return str(EXIFTOOL_EXE)
+        machine = platform.machine().lower()
+        preferred_arch = "x86" if machine in {"x86", "i386", "i686"} else "x64"
+        fallback_arch = "x64" if preferred_arch == "x86" else "x86"
+        for arch in (preferred_arch, fallback_arch):
+            candidate = VENDOR_DIR / "exiftool" / arch / "exiftool.exe"
+            if candidate.exists():
+                return str(candidate)
+        return "exiftool"
 
     def available(self) -> bool:
         """Return True if ExifTool can be executed."""
+        executable_path = Path(self.executable)
+        if executable_path.is_absolute():
+            return executable_path.exists()
         return shutil.which(self.executable) is not None
 
     def copy_all_metadata(self, original: Path, output: Path) -> None:

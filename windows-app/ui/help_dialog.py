@@ -67,7 +67,7 @@ HELP_HTML = """
 
 <h3>Metadata Preservation</h3>
 <ul>
-  <li>JPEG metadata preservation uses ExifTool.</li>
+  <li>JPEG metadata preservation uses the bundled ExifTool.</li>
   <li>Full metadata preservation is guaranteed only for JPEG outputs.</li>
   <li>For PNG/HEIC/HEIF outputs, the app warns that full EXIF preservation may not be available.</li>
 </ul>
@@ -76,19 +76,7 @@ HELP_HTML = """
 <ul>
   <li><b>No supported images found</b>: confirm the folder contains JPG, JPEG, PNG, HEIC, or HEIF files.</li>
   <li><b>No GPS metadata</b>: the image does not contain GPS coordinates, so Geo Stamping cannot be applied.</li>
-  <li><b>ExifTool is required</b>: install ExifTool and make sure <b>exiftool.exe</b> is available on PATH.</li>
-  <li><b>Installing ExifTool on Windows</b>:
-    <ol>
-      <li>Download the Windows executable from <b>exiftool.org</b>.</li>
-      <li>Extract the downloaded file.</li>
-      <li>Rename <b>exiftool(-k).exe</b> to <b>exiftool.exe</b>.</li>
-      <li>Move <b>exiftool.exe</b> to a permanent folder, for example <b>C:\\Tools\\ExifTool</b>.</li>
-      <li>Open <b>System Properties &gt; Advanced &gt; Environment Variables</b>.</li>
-      <li>Edit the user or system <b>Path</b> variable and add the folder that contains <b>exiftool.exe</b>.</li>
-      <li>Close and reopen Twality GMark Pro after updating PATH.</li>
-      <li>To verify, open Command Prompt and run <b>exiftool -ver</b>. It should print a version number.</li>
-    </ol>
-  </li>
+  <li><b>ExifTool is required</b>: Twality GMark Pro includes a private ExifTool copy. If that copy is unavailable, the app will also try <b>exiftool.exe</b> from PATH.</li>
   <li><b>Network timeout</b>: address lookup may fail if the reverse geocoding service is unavailable. The app can still stamp coordinates when GPS data exists.</li>
 </ul>
 """

@@ -15,9 +15,11 @@ env/
 
 # Packaging and build output
 build/
+build-vendor/
 dist/
 *.egg-info/
 *.spec.bak
+vendor/.tmp/
 
 # Runtime app state
 logs/
@@ -25,4 +27,3 @@ output/*
 !output/.gitkeep
 resources/settings.json
 resources/cache/
-

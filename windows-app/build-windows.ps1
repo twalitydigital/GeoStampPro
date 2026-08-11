@@ -4,7 +4,9 @@ param(
 
     [switch]$SkipInstaller,
 
-    [switch]$RegenerateStoreAssets
+    [switch]$RegenerateStoreAssets,
+
+    [switch]$FetchExifTool
 )
 
 $ErrorActionPreference = "Stop"
@@ -51,6 +53,14 @@ if ($RegenerateStoreAssets) {
     .\.venv\Scripts\python.exe tools\generate_store_assets.py
 }
 
+if ($FetchExifTool) {
+    if ($TargetArch -eq "x86") {
+        .\tools\fetch_exiftool.ps1 -TargetArch x86 -Bitness 32
+    } else {
+        .\tools\fetch_exiftool.ps1 -TargetArch x64 -Bitness 64
+    }
+}
+
 $storeAssets = Join-Path $root "assets\store"
 if (-not (Test-Path -LiteralPath $storeAssets)) {
     throw "Store assets were not found: $storeAssets. Run .\build-windows.ps1 -RegenerateStoreAssets once, then commit assets\store."
@@ -70,6 +80,28 @@ foreach ($asset in $requiredStoreAssets) {
         throw "Required Store asset was not found: $assetPath. Run .\build-windows.ps1 -RegenerateStoreAssets once, then commit assets\store."
     }
 }
+
+$exifToolArch = if ($TargetArch -eq "x86") { "x86" } else { "x64" }
+if ($TargetArch -eq "arm64") {
+    Write-Warning "No native Windows Arm64 ExifTool package is configured. Staging the x64 ExifTool helper for this build; test on Windows on Arm before publishing."
+}
+
+$exifToolRoot = Join-Path $root "vendor\exiftool\$exifToolArch"
+$exifToolExe = Join-Path $exifToolRoot "exiftool.exe"
+$exifToolFiles = Join-Path $exifToolRoot "exiftool_files"
+if (-not (Test-Path -LiteralPath $exifToolExe) -or -not (Test-Path -LiteralPath $exifToolFiles)) {
+    throw "Bundled ExifTool for $exifToolArch was not found under $exifToolRoot. Run .\build-windows.ps1 -TargetArch $TargetArch -FetchExifTool once, then commit vendor\exiftool\$exifToolArch."
+}
+
+$stagedVendorRoot = Join-Path $root "build-vendor"
+$stagedExifToolRoot = Join-Path $stagedVendorRoot "exiftool"
+if (Test-Path -LiteralPath $stagedVendorRoot) {
+    Remove-Item -LiteralPath $stagedVendorRoot -Recurse -Force
+}
+New-Item -ItemType Directory -Force -Path $stagedExifToolRoot | Out-Null
+Copy-Item -LiteralPath $exifToolExe -Destination (Join-Path $stagedExifToolRoot "exiftool.exe") -Force
+Copy-Item -LiteralPath $exifToolFiles -Destination $stagedExifToolRoot -Recurse -Force
+Copy-Item -Path (Join-Path $exifToolRoot "README*.txt") -Destination $stagedExifToolRoot -Force -ErrorAction SilentlyContinue
 
 .\.venv\Scripts\pyinstaller.exe -y installer\TwalityGMark.spec
 

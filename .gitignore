@@ -30,3 +30,4 @@ logs/
 *.orig
 
 *.exe
+windows-app/vendor/

@@ -52,14 +52,14 @@ Key features:
 - Preview first image before running a batch.
 - Recursive folder processing.
 - Pause, resume, cancel, progress, and per-file status reporting.
-- JPEG metadata preservation through ExifTool.
+- JPEG metadata preservation through bundled ExifTool.
 
 Important notes:
 
 - Geo Stamping requires GPS metadata in the source photo.
 - Full metadata preservation is guaranteed only for JPEG outputs.
 - Reverse geocoding and map display may require internet access.
-- ExifTool must be installed and available on PATH for full JPEG metadata restoration.
+- ExifTool is bundled privately for full JPEG metadata restoration.
 
 ## Search Terms
 
