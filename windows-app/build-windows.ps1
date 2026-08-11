@@ -14,8 +14,23 @@ $ErrorActionPreference = "Stop"
 $root = Split-Path -Parent $MyInvocation.MyCommand.Path
 Set-Location $root
 
+$venvRoot = if (-not [string]::IsNullOrWhiteSpace($env:VIRTUAL_ENV)) {
+    $env:VIRTUAL_ENV
+} else {
+    Join-Path $root ".venv"
+}
+$pythonExe = Join-Path $venvRoot "Scripts\python.exe"
+$pyInstallerExe = Join-Path $venvRoot "Scripts\pyinstaller.exe"
+
+if (-not (Test-Path -LiteralPath $pythonExe)) {
+    throw "Python executable was not found: $pythonExe. Activate the intended venv or create .venv."
+}
+if (-not (Test-Path -LiteralPath $pyInstallerExe)) {
+    throw "PyInstaller executable was not found: $pyInstallerExe. Install requirements-build.txt in the active venv."
+}
+
 try {
-    $runtimeArch = [System.Runtime.InteropServices.RuntimeInformation]::ProcessArchitecture
+    $runtimeArch = & $pythonExe -c "import platform; print(platform.machine())"
 } catch {
     $runtimeArch = $null
 }
@@ -36,6 +51,8 @@ if ($processArch -eq "amd64") {
     $processArch = "x64"
 } elseif ($processArch -eq "x86") {
     $processArch = "x86"
+} elseif ($processArch -eq "x86_64") {
+    $processArch = "x64"
 } elseif ($processArch -eq "arm64") {
     $processArch = "arm64"
 }
@@ -50,7 +67,7 @@ if ($archMap[$TargetArch] -ne $processArch) {
 }
 
 if ($RegenerateStoreAssets) {
-    .\.venv\Scripts\python.exe tools\generate_store_assets.py
+    & $pythonExe tools\generate_store_assets.py
 }
 
 if ($FetchExifTool) {
@@ -103,7 +120,7 @@ Copy-Item -LiteralPath $exifToolExe -Destination (Join-Path $stagedExifToolRoot 
 Copy-Item -LiteralPath $exifToolFiles -Destination $stagedExifToolRoot -Recurse -Force
 Copy-Item -Path (Join-Path $exifToolRoot "README*.txt") -Destination $stagedExifToolRoot -Force -ErrorAction SilentlyContinue
 
-.\.venv\Scripts\pyinstaller.exe -y installer\TwalityGMark.spec
+& $pyInstallerExe -y installer\TwalityGMark.spec
 
 $distRoot = Join-Path $root "dist\TwalityGMark"
 $distAssets = Join-Path $distRoot "Assets"

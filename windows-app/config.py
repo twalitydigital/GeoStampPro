@@ -8,6 +8,7 @@ from pathlib import Path
 
 APP_NAME = "Twality GMark Pro"
 APP_VERSION = "1.0.0"
+APP_METADATA_TOOL = "Tool: Twality GMark Pro 1.0"
 ORG_NAME = "Twality"
 
 BASE_DIR = Path(__file__).resolve().parent

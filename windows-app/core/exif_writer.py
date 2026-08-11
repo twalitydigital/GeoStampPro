@@ -7,12 +7,14 @@ import logging
 import platform
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 
-from config import EXIFTOOL_EXE, VENDOR_DIR
+from config import APP_METADATA_TOOL, EXIFTOOL_EXE, VENDOR_DIR
 
 LOGGER = logging.getLogger(__name__)
 EXIFTOOL_TIMEOUT_SECONDS = 30
+WINDOWS_NO_WINDOW_FLAGS = subprocess.CREATE_NO_WINDOW if sys.platform == "win32" else 0
 
 
 class ExifToolMissingError(RuntimeError):
@@ -56,11 +58,19 @@ class ExifWriter:
             "-TagsFromFile",
             str(original),
             "-all:all",
+            f"-XMP-dc:Subject+={APP_METADATA_TOOL}",
             str(output),
         ]
         LOGGER.info("Copying metadata with ExifTool: %s", output)
         try:
-            result = subprocess.run(command, capture_output=True, text=True, check=False, timeout=EXIFTOOL_TIMEOUT_SECONDS)
+            result = subprocess.run(
+                command,
+                capture_output=True,
+                text=True,
+                check=False,
+                timeout=EXIFTOOL_TIMEOUT_SECONDS,
+                creationflags=WINDOWS_NO_WINDOW_FLAGS,
+            )
         except subprocess.TimeoutExpired as exc:
             raise RuntimeError("ExifTool metadata copy timed out.") from exc
         if result.returncode != 0:
@@ -85,7 +95,14 @@ class ExifWriter:
     def _read_tags(self, path: Path, tags: list[str]) -> dict[str, str]:
         command = [self.executable, "-j", "-s", *tags, str(path)]
         try:
-            result = subprocess.run(command, capture_output=True, text=True, check=False, timeout=EXIFTOOL_TIMEOUT_SECONDS)
+            result = subprocess.run(
+                command,
+                capture_output=True,
+                text=True,
+                check=False,
+                timeout=EXIFTOOL_TIMEOUT_SECONDS,
+                creationflags=WINDOWS_NO_WINDOW_FLAGS,
+            )
         except subprocess.TimeoutExpired as exc:
             raise RuntimeError("ExifTool metadata read timed out.") from exc
         if result.returncode != 0:

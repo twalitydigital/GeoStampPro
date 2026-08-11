@@ -31,3 +31,5 @@ logs/
 
 *.exe
 windows-app/vendor/
+windows-app/.venv-x86/
+windows-app/msix_output/
