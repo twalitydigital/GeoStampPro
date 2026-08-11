@@ -99,7 +99,7 @@ function App() {
     // Draw Text
     ctx.fillStyle = '#00ffcc';
     ctx.font = 'bold 36px "Outfit", sans-serif';
-    ctx.fillText('GeoStamped', 40, canvas.height - panelHeight + 30);
+    ctx.fillText('GMarked', 40, canvas.height - panelHeight + 30);
     
     ctx.fillStyle = '#ffffff';
     ctx.font = '24px "Outfit", sans-serif';
@@ -117,7 +117,7 @@ function App() {
       
       const exifObj = {
         "0th": {
-          [piexif.ImageIFD.Software]: "GeoStamp Mobile Web",
+          [piexif.ImageIFD.Software]: "Twality GMark Pro Web",
         },
         "GPS": {
           [piexif.GPSIFD.GPSLatitudeRef]: latRef,
@@ -143,7 +143,7 @@ function App() {
     if (!photoData) return;
     const a = document.createElement('a');
     a.href = photoData;
-    a.download = `GeoStamped_${new Date().getTime()}.jpg`;
+    a.download = `GMarked_${new Date().getTime()}.jpg`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -152,7 +152,7 @@ function App() {
   return (
     <>
       <header>
-        <h1>GeoStamp Mobile</h1>
+        <h1>Twality GMark Pro</h1>
         <p>Lightweight Progressive Web App</p>
       </header>
 

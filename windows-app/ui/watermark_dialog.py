@@ -50,7 +50,7 @@ class WatermarkDialog(QDialog):
         self._set_combo_value(self.watermark_type, str(settings.get("watermark_type", "text")))
         self.watermark_type.currentIndexChanged.connect(self.update_type_controls)
 
-        self.watermark_text = QLineEdit(str(settings.get("watermark_text", "Twality GeoStamp Pro")))
+        self.watermark_text = QLineEdit(str(settings.get("watermark_text", "Twality GMark Pro")))
         self.watermark_image_path = QLineEdit(str(settings.get("watermark_image_path", "")))
         self.image_browse_button = QPushButton("Browse")
         self.image_browse_button.clicked.connect(self.pick_watermark_image)

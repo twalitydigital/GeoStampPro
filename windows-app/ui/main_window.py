@@ -1,4 +1,4 @@
-"""Main window for Twality GeoStamp Pro."""
+"""Main window for Twality GMark Pro."""
 
 from __future__ import annotations
 
@@ -194,7 +194,7 @@ class MainWindow(QMainWindow):
         input_text = self.input_edit.text().strip()
         if not input_text:
             return
-        output_folder = Path(input_text) / "geostamp_output"
+        output_folder = Path(input_text) / "gmark_output"
         self.output_edit.setText(str(output_folder))
         self.settings.set("last_input_folder", input_text)
         self.settings.set("last_output_folder", str(output_folder))
@@ -366,7 +366,7 @@ class MainWindow(QMainWindow):
             stamp_all_additional_exif=self.exif_group.isChecked(),
             print_watermark=self.watermark_group.isChecked(),
             watermark_type=str(self.settings.get("watermark_type", "text")),
-            watermark_text=str(self.settings.get("watermark_text", "Twality GeoStamp Pro")),
+            watermark_text=str(self.settings.get("watermark_text", "Twality GMark Pro")),
             watermark_image_path=str(self.settings.get("watermark_image_path", "")),
             watermark_position=str(self.settings.get("watermark_position", "bottom_right")),
             watermark_opacity=int(self.settings.get("watermark_opacity", 45)),

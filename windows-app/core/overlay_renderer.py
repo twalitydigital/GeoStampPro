@@ -66,7 +66,7 @@ class OverlayOptions:
     stamp_all_additional_exif: bool = False
     print_watermark: bool = False
     watermark_type: str = "text"
-    watermark_text: str = "Twality GeoStamp Pro"
+    watermark_text: str = "Twality GMark Pro"
     watermark_image_path: str = ""
     watermark_position: str = "bottom_right"
     watermark_opacity: int = 45

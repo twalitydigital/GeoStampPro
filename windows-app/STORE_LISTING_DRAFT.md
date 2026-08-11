@@ -2,7 +2,7 @@
 
 ## Product Name
 
-Twality GeoStamp Pro
+Twality GMark Pro
 
 ## Publisher
 
@@ -17,13 +17,26 @@ Free
 Photo & video, productivity, or utilities. Choose the most accurate category available
 in Partner Center.
 
+## Package Metadata
+
+- Store reserved name: Twality GMark Pro
+- Package display name: Twality GMark Pro
+- Publisher display name: Twality Digital Solutions LLP
+- Package identity name: use the exact value assigned by Partner Center.
+- Package publisher: use the exact Partner Center publisher distinguished name.
+- Version for first MSIX submission: 1.0.0.0
+- Executable: TwalityGMark.exe
+- Initial architecture: x64
+- Capabilities: internet access for reverse geocoding and map display; avoid broad
+  file-system capabilities unless packaging validation proves they are required.
+
 ## Short Description
 
 Stamp photos with GPS, EXIF, and watermark information while preserving originals.
 
 ## Description
 
-Twality GeoStamp Pro is a free Windows desktop utility for photographers, field teams,
+Twality GMark Pro is a free Windows desktop utility for photographers, field teams,
 surveyors, documentation teams, and anyone who needs clean stamped copies of photos.
 
 The app can print GPS coordinates, address information, timestamps, camera metadata,
@@ -50,7 +63,7 @@ Important notes:
 
 ## Search Terms
 
-geotag, geostamp, exif, watermark, gps, photo, metadata
+geotag, gmark, exif, watermark, gps, photo, metadata
 
 Microsoft currently limits search terms; keep them relevant and avoid competitor names
 or pricing terms.

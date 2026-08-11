@@ -1,6 +1,6 @@
-# Privacy Notice for Twality GeoStamp Pro 1.0
+# Privacy Notice for Twality GMark Pro 1.0
 
-Twality GeoStamp Pro is a desktop utility by Twality Digital Solutions LLP for stamping
+Twality GMark Pro is a desktop utility by Twality Digital Solutions LLP for stamping
 photos with geo, EXIF, and watermark information.
 
 ## Summary
@@ -34,7 +34,7 @@ provider.
 
 ## Data Sharing
 
-Twality GeoStamp Pro does not transmit image files to Twality Digital Solutions LLP.
+Twality GMark Pro does not transmit image files to Twality Digital Solutions LLP.
 Network requests used for reverse geocoding or maps are sent only to the configured
 external service providers needed to perform those features.
 
@@ -47,7 +47,7 @@ All Additional EXIF Data stamping, and Print Watermark independently in the app.
 
 The app stores settings, logs, and cache files locally on the user's device. In packaged
 Windows builds, these files are stored under the user's LocalAppData folder for Twality
-GeoStamp Pro. Users can delete these files if they want to reset local state.
+GMark Pro. Users can delete these files if they want to reset local state.
 
 ## Contact
 

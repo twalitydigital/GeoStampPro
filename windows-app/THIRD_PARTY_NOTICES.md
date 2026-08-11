@@ -1,6 +1,6 @@
 # Third-Party Notices
 
-Twality GeoStamp Pro uses third-party components and services. This file is provided as
+Twality GMark Pro uses third-party components and services. This file is provided as
 a practical notice for packaging and Microsoft Store review. Verify exact dependency
 versions and license texts before final publication.
 

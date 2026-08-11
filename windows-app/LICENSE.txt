@@ -1,15 +1,15 @@
-Twality GeoStamp Pro 1.0 Freeware License
+Twality GMark Pro 1.0 Freeware License
 
 Copyright (c) 2026 Twality Digital Solutions LLP.
 All rights reserved.
 
-This license applies to the Twality GeoStamp Pro desktop application distributed by
+This license applies to the Twality GMark Pro desktop application distributed by
 Twality Digital Solutions LLP.
 
 1. License Grant
 
 Twality Digital Solutions LLP grants you a personal, non-exclusive, non-transferable,
-revocable license to install and use Twality GeoStamp Pro free of charge for personal,
+revocable license to install and use Twality GMark Pro free of charge for personal,
 professional, educational, and internal business use.
 
 2. Restrictions
@@ -24,7 +24,7 @@ You may not:
 
 3. Ownership
 
-Twality GeoStamp Pro, including its name, branding, user interface, documentation, and
+Twality GMark Pro, including its name, branding, user interface, documentation, and
 application code, is owned by Twality Digital Solutions LLP or its licensors. This
 license does not transfer ownership of the application to you.
 

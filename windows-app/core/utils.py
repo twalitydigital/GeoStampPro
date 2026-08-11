@@ -20,7 +20,7 @@ def ensure_directories() -> None:
 def configure_logging() -> None:
     """Configure rotating file and console logging."""
     LOG_DIR.mkdir(parents=True, exist_ok=True)
-    log_file = LOG_DIR / "twality-geostamp.log"
+    log_file = LOG_DIR / "twality-gmark.log"
     root = logging.getLogger()
     root.setLevel(logging.INFO)
     root.handlers.clear()
